@@ -50,9 +50,6 @@ set -x
 
 unset OS_CACERT
 
-mkdir ~/.rally/
-cp /etc/rally/rally.conf ~/.rally/
-
 crudini --set ~/.rally/rally.conf DEFAULT openstack_client_http_timeout 300
 
 rally deployment create --fromenv --name openstack

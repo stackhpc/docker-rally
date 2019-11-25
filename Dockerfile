@@ -26,14 +26,11 @@ RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' >> /etc/bash.bashrc
 RUN rm -rf /root/.cache/
 
 # Pre-download tempest to speed up runs
-RUN git clone --bare https://opendev.org/openstack/tempest /opt/tempest && \
-    pip install -r https://raw.githubusercontent.com/openstack/tempest/master/requirements.txt \
-    -c https://raw.githubusercontent.com/openstack/requirements/master/upper-constraints.txt
+RUN git clone --bare https://opendev.org/openstack/tempest /opt/tempest
 
 USER rally
 ENV HOME /home/rally
 RUN mkdir -p /home/rally/data && mkdir ~/.rally && cp /etc/rally/rally.conf ~/.rally/ && rally db recreate
-RUN rally verify create-verifier --name tempest --type tempest --system-wide --source /opt/tempest
 
 COPY bin/rally-verify-wrapper.sh /usr/bin/rally-verify-wrapper.sh
 
