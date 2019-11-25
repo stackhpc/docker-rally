@@ -9,12 +9,11 @@
 set -eux
 
 artefacts_dir=/home/rally/artefacts
+tempest_source_default="--source /opt/tempest"
 
-tempest_source=""
+tempest_source="$tempest_source_default"
 if [ ! -z ${TEMPEST_SOURCE+x} ]; then
     tempest_source="--source $TEMPEST_SOURCE"
-else
-    tempest_source="--source /opt/tempest"
 fi
 
 tempest_version=""
@@ -54,7 +53,9 @@ crudini --set ~/.rally/rally.conf DEFAULT openstack_client_http_timeout 300
 
 rally deployment create --fromenv --name openstack
 
-rally verify create-verifier --name tempest --type tempest $tempest_source $tempest_version
+if [ "$tempest_source" != "$tempest_source_default" -o "tempest_version" != ""]; then
+    rally verify create-verifier --name tempest --type tempest $tempest_source $tempest_version
+fi
 
 if [ -f ~/tempest-overrides.conf ]; then
     rally verify configure-verifier --reconfigure --extend ~/tempest-overrides.conf
@@ -64,3 +65,4 @@ rally verify start $skip_list $load_list $pattern \
       > >(tee -a $artefacts_dir/stdout.log) 2> >(tee -a $artefacts_dir/stderr.log >&2)
 
 rally verify report --type html --to $artefacts_dir/rally-verify-report.html
+rally verify report --type 

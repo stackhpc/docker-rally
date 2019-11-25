@@ -30,7 +30,8 @@ RUN git clone --bare https://opendev.org/openstack/tempest /opt/tempest
 
 USER rally
 ENV HOME /home/rally
-RUN mkdir -p /home/rally/data && mkdir ~/.rally && cp /etc/rally/rally.conf ~/.rally/ && rally db recreate
+RUN mkdir -p /home/rally/data && mkdir ~/.rally && cp /etc/rally/rally.conf ~/.rally/ && rally db recreate &&\
+    rally verify create-verifier --name default --type tempest
 
 COPY bin/rally-verify-wrapper.sh /usr/bin/rally-verify-wrapper.sh
 
