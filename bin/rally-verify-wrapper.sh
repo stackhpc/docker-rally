@@ -65,4 +65,4 @@ rally verify start $skip_list $load_list $pattern \
       > >(tee -a $artefacts_dir/stdout.log) 2> >(tee -a $artefacts_dir/stderr.log >&2)
 
 rally verify report --type html --to $artefacts_dir/rally-verify-report.html
-rally verify report --type 
+rally verify report --type junit-xml --to $artefacts_dir/rally-junit.xml
