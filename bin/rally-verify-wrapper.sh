@@ -33,7 +33,7 @@ if [ -f ~/tempest-skip-list ]; then
 fi
 
 pattern=""
-if [ ! -z ${TEMPEST_PATTERN+x} ]; then
+if [ ! -z ${TEMPEST_PATTERN-x} ]; then
    pattern="--pattern $TEMPEST_PATTERN"
 fi
 
