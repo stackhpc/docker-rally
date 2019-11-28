@@ -69,4 +69,4 @@ rally verify report --type html --to $artifacts_dir/rally-verify-report.html
 rally verify report --type json --to $artifacts_dir/rally-verify-report.json
 rally verify report --type junit-xml --to $artifacts_dir/rally-junit.xml
 
-rally-verify-extract.sh --status fail > $artifacts_dir/failed-tests
+rally-extract-tests.sh --status fail > $artifacts_dir/failed-tests
