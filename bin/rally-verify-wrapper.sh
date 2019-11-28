@@ -3,8 +3,8 @@
 # This script assumes the following bind mounts
 # - An openrc file bind mounted to /home/rally/openrc
 # - A directory mount at /home/rally/artifacts
-# - (optional) a skip list mounted at /home/rally/skip-list
-# - (optional) a load list mounted at /home/rally/load-list
+# - (optional) a skip list mounted at /home/rally/tempest-skip-list
+# - (optional) a load list mounted at /home/rally/tempest-load-list
 # - (optional) a set of tempest overrides mounts at /home/rally/tempest-overrides.conf
 
 set -eux
