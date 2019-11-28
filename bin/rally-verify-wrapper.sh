@@ -2,13 +2,14 @@
 
 # This script assumes the following bind mounts
 # - An openrc file bind mounted to /home/rally/openrc
-# - A directory mount at /home/rally/artefacts
+# - A directory mount at /home/rally/artifacts
 # - (optional) a skip list mounted at /home/rally/skip-list
-# - (optional) a load list mounted at /home/rally/load-list 
+# - (optional) a load list mounted at /home/rally/load-list
+# - (optional) a set of tempest overrides mounts at /home/rally/tempest-overrides.conf
 
 set -eux
 
-artefacts_dir=/home/rally/artefacts
+artifacts_dir=/home/rally/artifacts
 tempest_source_default="--source /opt/tempest"
 
 tempest_source="$tempest_source_default"
@@ -37,8 +38,8 @@ if [ ! -z ${TEMPEST_PATTERN-x} ]; then
    pattern="--pattern $TEMPEST_PATTERN"
 fi
 
-if [ ! -d $artefacts_dir ]; then
-    >&2 echo "You must mount a directory at $artefacts_dir"
+if [ ! -d $artifacts_dir ]; then
+    >&2 echo "You must mount a directory at $artifacts_dir"
     exit -1
 fi
 
@@ -62,10 +63,10 @@ if [ -f ~/tempest-overrides.conf ]; then
 fi
 
 rally verify start $skip_list $load_list $pattern \
-      > >(tee -a $artefacts_dir/stdout.log) 2> >(tee -a $artefacts_dir/stderr.log >&2)
+      > >(tee -a $artifacts_dir/stdout.log) 2> >(tee -a $artifacts_dir/stderr.log >&2)
 
-rally verify report --type html --to $artefacts_dir/rally-verify-report.html
-rally verify report --type json --to $artefacts_dir/rally-verify-report.json
-rally verify report --type junit-xml --to $artefacts_dir/rally-junit.xml
+rally verify report --type html --to $artifacts_dir/rally-verify-report.html
+rally verify report --type json --to $artifacts_dir/rally-verify-report.json
+rally verify report --type junit-xml --to $artifacts_dir/rally-junit.xml
 
-rally-verify-extract.sh --status fail > $artefacts_dir/failed-tests
+rally-verify-extract.sh --status fail > $artifacts_dir/failed-tests
