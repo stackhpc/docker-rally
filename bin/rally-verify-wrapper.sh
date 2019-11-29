@@ -25,12 +25,12 @@ fi
 load_list=""
 # You can't have a load list and a pattern, pattern takes priority
 if [ -f ~/tempest-load-list ] && [ -z ${TEMPEST_PATTERN:+x} ]; then
-    load_list="--load-list ~/tempest-load-list"
+    load_list="--load-list /home/rally/tempest-load-list"
 fi
 
 skip_list=""
 if [ -f ~/tempest-skip-list ]; then
-    skip_list="--skip-list ~/tempest-skip-list"
+    skip_list="--skip-list /home/rally/tempest-skip-list"
 fi
 
 pattern=""
