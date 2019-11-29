@@ -54,7 +54,7 @@ crudini --set ~/.rally/rally.conf DEFAULT openstack_client_http_timeout 300
 
 rally deployment create --fromenv --name openstack
 
-if [ "$tempest_source" != "$tempest_source_default" ] || [ "tempest_version" != "" ]; then
+if [ "$tempest_source" != "$tempest_source_default" ] || [ "$tempest_version" != "" ]; then
     rally verify create-verifier --name tempest --type tempest $tempest_source $tempest_version
 fi
 
