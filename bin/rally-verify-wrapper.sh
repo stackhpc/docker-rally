@@ -13,12 +13,12 @@ artifacts_dir=/home/rally/artifacts
 tempest_source_default="--source /opt/tempest"
 
 tempest_source="$tempest_source_default"
-if [ ! -z ${TEMPEST_SOURCE+x} ]; then
+if [ ! -z ${TEMPEST_SOURCE-x} ]; then
     tempest_source="--source $TEMPEST_SOURCE"
 fi
 
 tempest_version=""
-if [ ! -z ${TEMPEST_VERSION+x} ]; then
+if [ ! -z ${TEMPEST_VERSION-x} ]; then
     tempest_version="--version $TEMPEST_VERSION"
 fi
 
