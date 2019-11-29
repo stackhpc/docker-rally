@@ -24,7 +24,7 @@ fi
 
 load_list=""
 # You can't have a load list and a pattern, pattern takes priority
-if [ -f ~/tempest-load-list ] && [ -z ${TEMPEST_PATTERN+x} ]; then
+if [ -f ~/tempest-load-list ] && [ -z ${TEMPEST_PATTERN-x} ]; then
     load_list="--load-list ~/tempest-load-list"
 fi
 
