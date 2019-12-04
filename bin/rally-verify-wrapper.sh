@@ -39,7 +39,7 @@ if [ ! -z ${TEMPEST_PATTERN:+x} ]; then
 fi
 
 concurrency=""
-if [ ! -z ${$TEMPEST_CONCURRENCY:+x} ]; then
+if [ ! -z ${TEMPEST_CONCURRENCY:+x} ]; then
    concurrency="--concurrency $TEMPEST_CONCURRENCY"
 fi
 
