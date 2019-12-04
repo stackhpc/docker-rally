@@ -38,6 +38,11 @@ if [ ! -z ${TEMPEST_PATTERN-x} ]; then
    pattern="--pattern $TEMPEST_PATTERN"
 fi
 
+concurrency=""
+if [ ! -z ${$TEMPEST_CONCURRENCY-x} ]; then
+   concurrency="--concurrency $TEMPEST_CONCURRENCY"
+fi
+
 if [ ! -d $artifacts_dir ]; then
     >&2 echo "You must mount a directory at $artifacts_dir"
     exit -1
@@ -62,7 +67,7 @@ if [ -f ~/tempest-overrides.conf ]; then
     rally verify configure-verifier --reconfigure --extend ~/tempest-overrides.conf
 fi
 
-rally verify start $skip_list $load_list $pattern \
+rally verify start $skip_list $load_list $pattern $concurrency\
       > >(tee -a $artifacts_dir/stdout.log) 2> >(tee -a $artifacts_dir/stderr.log >&2)
 
 rally verify report --type html --to $artifacts_dir/rally-verify-report.html
