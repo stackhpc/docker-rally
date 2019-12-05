@@ -75,3 +75,7 @@ rally verify report --type json --to $artifacts_dir/rally-verify-report.json
 rally verify report --type junit-xml --to $artifacts_dir/rally-junit.xml
 
 rally-extract-tests.sh --status fail > $artifacts_dir/failed-tests
+
+# NOTE: this assumes only one of these files exists which should ordinarily
+# be the case when the container is discarded after one run.
+find ~/.rally -name "tempest.log" -print -exec cp {} $artifacts_dir/ \;
