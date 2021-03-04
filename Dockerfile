@@ -36,4 +36,3 @@ COPY bin/rally-extract-tests.sh /usr/bin/rally-extract-tests.sh
 # Data generated during the image creation is copied to volume only when it's
 # attached for the first time (volume initialization)
 VOLUME ["/home/rally/.rally"]
-ENTRYPOINT ["/bin/bash"]
