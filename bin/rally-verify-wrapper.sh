@@ -50,7 +50,14 @@ fi
 
 # Don't print secrets
 set +x
-. ~/openrc
+if [ -f ~/openrc ]; then
+    . ~/openrc
+elif [ ! -z ${TEMPEST_OPENRC:+x} ]; then
+    . <(echo "$TEMPEST_OPENRC")
+else
+   >&2 echo "Could not find openrc file. Please define TEMPEST_OPENRC or copy the file to ~/openrc."
+   exit -1
+fi
 set -x
 
 unset OS_CACERT
