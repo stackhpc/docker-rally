@@ -35,16 +35,16 @@ fi
 
 pattern=""
 if [ ! -z ${TEMPEST_PATTERN:+x} ]; then
-   pattern="--pattern $TEMPEST_PATTERN"
+    pattern="--pattern $TEMPEST_PATTERN"
 fi
 
 concurrency=""
 if [ ! -z ${TEMPEST_CONCURRENCY:+x} ]; then
-   concurrency="--concurrency $TEMPEST_CONCURRENCY"
+    concurrency="--concurrency $TEMPEST_CONCURRENCY"
 fi
 
 if [ ! -d $artifacts_dir ]; then
-    >&2 echo "You must mount a directory at $artifacts_dir"
+    echo >&2 "You must mount a directory at $artifacts_dir"
     exit -1
 fi
 
@@ -55,8 +55,8 @@ if [ -f ~/openrc ]; then
 elif [ ! -z ${TEMPEST_OPENRC:+x} ]; then
     . <(echo "$TEMPEST_OPENRC")
 else
-   >&2 echo "Could not find openrc file. Please define TEMPEST_OPENRC or copy the file to ~/openrc."
-   exit -1
+    echo >&2 "Could not find openrc file. Please define TEMPEST_OPENRC or copy the file to ~/openrc."
+    exit -1
 fi
 set -x
 
@@ -74,14 +74,13 @@ if [ -f ~/tempest-overrides.conf ]; then
     rally verify configure-verifier --reconfigure --extend ~/tempest-overrides.conf
 fi
 
-rally verify start $skip_list $load_list $pattern $concurrency\
-      > >(tee -a $artifacts_dir/stdout.log) 2> >(tee -a $artifacts_dir/stderr.log >&2)
+rally verify start $skip_list $load_list $pattern $concurrency > >(tee -a $artifacts_dir/stdout.log) 2> >(tee -a $artifacts_dir/stderr.log >&2)
 
 rally verify report --type html --to $artifacts_dir/rally-verify-report.html
 rally verify report --type json --to $artifacts_dir/rally-verify-report.json
 rally verify report --type junit-xml --to $artifacts_dir/rally-junit.xml
 
-rally-extract-tests.sh --status fail > $artifacts_dir/failed-tests
+rally-extract-tests.sh --status fail >$artifacts_dir/failed-tests
 
 # NOTE: this assumes only one of these files exists which should ordinarily
 # be the case when the container is discarded after one run.
