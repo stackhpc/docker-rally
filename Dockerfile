@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 RUN sed -i s/^deb-src.*// /etc/apt/sources.list
 
-RUN apt-get update && apt-get install --yes sudo python3-dev python3-pip vim git-core crudini jq && \
+RUN apt-get update && apt-get install --yes sudo python3-dev python3-pip vim git-core crudini jq iputils-ping && \
     apt clean && \
     pip3 --no-cache-dir install --upgrade pip setuptools && \
     useradd -u 65500 -m rally && \
