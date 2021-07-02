@@ -22,6 +22,14 @@ if [ ! -z ${TEMPEST_VERSION:+x} ]; then
     tempest_version="--version $TEMPEST_VERSION"
 fi
 
+if [ ! -z ${TEMPEST_LOAD_LIST:+x} ]; then
+    echo "$TEMPEST_LOAD_LIST" > ~/tempest-load-list
+fi
+
+if [ ! -z ${TEMPEST_SKIP_LIST:+x} ]; then
+    echo "$TEMPEST_SKIP_LIST" > ~/tempest-skip-list
+fi
+
 load_list=""
 # You can't have a load list and a pattern, pattern takes priority
 if [ -f ~/tempest-load-list ] && [ -z ${TEMPEST_PATTERN:+x} ]; then
