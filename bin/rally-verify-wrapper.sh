@@ -75,6 +75,10 @@ set -x
 unset OS_CACERT
 
 crudini --set ~/.rally/rally.conf DEFAULT openstack_client_http_timeout 300
+crudini --set ~/.rally/rally.conf openstack flavor_ref_ram 128
+crudini --set ~/.rally/rally.conf openstack flavor_ref_alt_ram 256
+crudini --set ~/.rally/rally.conf openstack flavor_ref_disk 1
+crudini --set ~/.rally/rally.conf openstack flavor_ref_alt_disk 1
 
 rally deployment create --fromenv --name openstack
 
