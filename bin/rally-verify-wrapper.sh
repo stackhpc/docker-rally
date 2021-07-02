@@ -30,6 +30,10 @@ if [ ! -z ${TEMPEST_SKIP_LIST:+x} ]; then
     echo "$TEMPEST_SKIP_LIST" > ~/tempest-skip-list
 fi
 
+if [ ! -z ${TEMPEST_CONF_OVERRIDES:+x} ]; then
+    echo "$TEMPEST_CONF_OVERRIDES" > ~/tempest-overrides.conf
+fi
+
 load_list=""
 # You can't have a load list and a pattern, pattern takes priority
 if [ -f ~/tempest-load-list ] && [ -z ${TEMPEST_PATTERN:+x} ]; then
