@@ -90,7 +90,7 @@ if [ -f ~/tempest-overrides.conf ]; then
     rally verify configure-verifier --reconfigure --extend ~/tempest-overrides.conf
 fi
 
-rally verify start $skip_list $load_list $pattern $concurrency > >(tee -a $artifacts_dir/stdout.log) 2> >(tee -a $artifacts_dir/stderr.log >&2)
+rally verify start $skip_list $load_list $pattern $concurrency > >(tee -a $artifacts_dir/stdout.log) 2> >(tee -a $artifacts_dir/stderr.log >&2) || export failed=1
 
 rally verify report --type html --to $artifacts_dir/rally-verify-report.html
 rally verify report --type json --to $artifacts_dir/rally-verify-report.json
