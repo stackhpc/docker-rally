@@ -32,6 +32,7 @@ RUN rally verify create-verifier --name default --type tempest
 
 COPY bin/rally-verify-wrapper.sh /usr/bin/rally-verify-wrapper.sh
 COPY bin/rally-extract-tests.sh /usr/bin/rally-extract-tests.sh
+COPY bin/rally-normalize.py /usr/bin/rally-normalize.py
 
 # Data generated during the image creation is copied to volume only when it's
 # attached for the first time (volume initialization)
