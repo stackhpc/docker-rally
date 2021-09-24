@@ -2,6 +2,9 @@ FROM ubuntu:20.04
 
 RUN sed -i s/^deb-src.*// /etc/apt/sources.list
 
+ARG TEMPEST_SOURCE=https://github.com/openstack/tempest
+ARG TEMPEST_VERSION=master
+
 RUN apt-get update && apt-get install --yes sudo python3-dev python3-pip vim git-core crudini jq iputils-ping && \
     apt clean && \
     pip3 --no-cache-dir install --upgrade pip setuptools && \
@@ -25,7 +28,7 @@ RUN crudini --set ~/.rally/rally.conf database connection sqlite:////home/rally/
 
 RUN rally db recreate
 
-RUN rally verify create-verifier --name default --type tempest
+RUN rally verify create-verifier --name default --type tempest --source $TEMPEST_SOURCE --version $TEMPEST_VERSION
 
 COPY bin/rally-verify-wrapper.sh /usr/bin/rally-verify-wrapper.sh
 COPY bin/rally-extract-tests.sh /usr/bin/rally-extract-tests.sh

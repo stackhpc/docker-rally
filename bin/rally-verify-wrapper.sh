@@ -10,17 +10,6 @@
 set -eux
 
 artifacts_dir=/home/rally/artifacts
-tempest_source_default="--source /opt/tempest"
-
-tempest_source="$tempest_source_default"
-if [ ! -z ${TEMPEST_SOURCE:+x} ]; then
-    tempest_source="--source $TEMPEST_SOURCE"
-fi
-
-tempest_version=""
-if [ ! -z ${TEMPEST_VERSION:+x} ]; then
-    tempest_version="--version $TEMPEST_VERSION"
-fi
 
 if [ ! -z ${TEMPEST_LOAD_LIST:+x} ]; then
     echo "$TEMPEST_LOAD_LIST" > ~/tempest-load-list
@@ -85,10 +74,6 @@ crudini --set ~/.rally/rally.conf openstack flavor_ref_disk 1
 crudini --set ~/.rally/rally.conf openstack flavor_ref_alt_disk 1
 
 rally deployment create --fromenv --name openstack
-
-if [ "$tempest_source" != "$tempest_source_default" ] || [ "$tempest_version" != "" ]; then
-    rally verify create-verifier --name tempest --type tempest $tempest_source $tempest_version
-fi
 
 if [ -f ~/tempest-overrides.conf ]; then
     rally verify configure-verifier --reconfigure --extend ~/tempest-overrides.conf
