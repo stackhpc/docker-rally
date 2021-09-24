@@ -25,9 +25,6 @@ RUN crudini --set ~/.rally/rally.conf database connection sqlite:////home/rally/
 
 RUN rally db recreate
 
-# Docker volumes have specific behavior that allows this construction to work.
-# Data generated during the image creation is copied to volume only when it's
-# attached for the first time (volume initialization)
 RUN rally verify create-verifier --name default --type tempest
 
 COPY bin/rally-verify-wrapper.sh /usr/bin/rally-verify-wrapper.sh
