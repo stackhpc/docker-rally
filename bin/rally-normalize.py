@@ -74,15 +74,14 @@ class TestListParser(object):
         """
         test_mappings = {}
         for testcase in test_list:
-            if testcase.startswith("tempest"):
-                # Search for any strings like '[smoke, gate]' in the test ID.
-                match = re.search('(\[.*\])', testcase)
+            # Search for any strings like '[smoke, gate]' in the test ID.
+            match = re.search('(\[.*\])', testcase)
 
-                if match:
-                    testcase = re.sub('\[.*\]', '', testcase)
-                    test_mappings[testcase] = match.group(1)
-                else:
-                    test_mappings[testcase] = ""
+            if match:
+                testcase = re.sub('\[.*\]', '', testcase)
+                test_mappings[testcase] = match.group(1)
+            else:
+                test_mappings[testcase] = ""
         return test_mappings
 
     def _get_base_test_ids_from_list_file(self, list_location):
