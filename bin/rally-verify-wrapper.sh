@@ -38,6 +38,10 @@ load_list=""
 # You can't have a load list and a pattern, pattern takes priority
 if [ -f ~/tempest-load-list ] && [ -z ${TEMPEST_PATTERN:+x} ]; then
     load_list="--load-list /home/rally/tempest-load-list"
+    if [ $(wc -l /home/rally/tempest-load-list | cut -d ' ' -f 1) -lt 1]; then
+        echo >&2 "The load list appears to be empty, exiting..."
+        exit -1
+    fi
 fi
 
 skip_list=""
@@ -75,6 +79,10 @@ set -x
 unset OS_CACERT
 
 crudini --set ~/.rally/rally.conf DEFAULT openstack_client_http_timeout 300
+crudini --set ~/.rally/rally.conf openstack flavor_ref_ram 128
+crudini --set ~/.rally/rally.conf openstack flavor_ref_alt_ram 256
+crudini --set ~/.rally/rally.conf openstack flavor_ref_disk 1
+crudini --set ~/.rally/rally.conf openstack flavor_ref_alt_disk 1
 
 rally deployment create --fromenv --name openstack
 
@@ -86,7 +94,18 @@ if [ -f ~/tempest-overrides.conf ]; then
     rally verify configure-verifier --reconfigure --extend ~/tempest-overrides.conf
 fi
 
-rally verify start $skip_list $load_list $pattern $concurrency > >(tee -a $artifacts_dir/stdout.log) 2> >(tee -a $artifacts_dir/stderr.log >&2)
+if [ -f ~/tempest-load-list ] && [ -z ${TEMPEST_PATTERN:+x} ]; then
+    if [ ${TEMPEST_NORMALIZE_LOAD_LIST:-1} -eq 1 ]; then
+        echo normalizing load-list
+        rally-normalize.py /home/rally/tempest-load-list
+    fi
+    if [ $(wc -l /home/rally/tempest-load-list | cut -d ' ' -f 1) -lt 1 ]; then
+        echo >&2 "The load list appears to be empty, exiting..."
+        exit -1
+    fi
+fi
+
+rally verify start $skip_list $load_list $pattern $concurrency > >(tee -a $artifacts_dir/stdout.log) 2> >(tee -a $artifacts_dir/stderr.log >&2) || export failed=1
 
 rally verify report --type html --to $artifacts_dir/rally-verify-report.html
 rally verify report --type json --to $artifacts_dir/rally-verify-report.json
