@@ -11,6 +11,19 @@ set -eux
 
 artifacts_dir=/home/rally/artifacts
 
+if [ ! -z ${TEMPEST_NO_PROXY_EXTRA:+x} ]; then
+    if [ -z ${NO_PROXY:+x} ]; then
+        NO_PROXY="$TEMPEST_NO_PROXY_EXTRA"
+    else
+        NO_PROXY="$NO_PROXY,$TEMPEST_NO_PROXY_EXTRA"
+    fi
+    if [ -z ${no_proxy:+x} ]; then
+        no_proxy="$TEMPEST_NO_PROXY_EXTRA"
+    else
+        no_proxy="$no_proxy,$TEMPEST_NO_PROXY_EXTRA"
+    fi
+fi
+
 if [ ! -z ${TEMPEST_LOAD_LIST:+x} ]; then
     echo "$TEMPEST_LOAD_LIST" > ~/tempest-load-list
 fi
