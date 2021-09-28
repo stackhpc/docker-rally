@@ -47,6 +47,7 @@ RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_IRONIC_SOURCE --versi
 COPY bin/rally-verify-wrapper.sh /usr/bin/rally-verify-wrapper.sh
 COPY bin/rally-extract-tests.sh /usr/bin/rally-extract-tests.sh
 COPY bin/rally-normalize.py /usr/bin/rally-normalize.py
+COPY bin/test_server.bin /opt/octavia-tempest-plugin/test_server.bin
 
 # Data generated during the image creation is copied to volume only when it's
 # attached for the first time (volume initialization)
