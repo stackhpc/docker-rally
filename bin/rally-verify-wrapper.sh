@@ -87,6 +87,12 @@ crudini --set ~/.rally/rally.conf openstack flavor_ref_disk 1
 crudini --set ~/.rally/rally.conf openstack flavor_ref_alt_disk 1
 crudini --set ~/.rally/rally.conf openstack img_url http://download.cirros-cloud.net/0.5.1/cirros-0.5.1-x86_64-disk.img
 
+# WARNING: This option relies on a custom fork for rally-openstack and should
+# be considered unstable
+if [ ! -z ${RALLY_CONF_ENABLE_CREATE_TEMPEST_RESOURCES:+x} ]; then
+    crudini --set ~/.rally/rally.conf openstack enable_create_resources true
+fi
+
 rally deployment create --fromenv --name openstack
 
 if [ -f ~/tempest-overrides.conf ]; then
