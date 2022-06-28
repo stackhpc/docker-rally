@@ -5,8 +5,8 @@ RUN sed -i s/^deb-src.*// /etc/apt/sources.list
 ARG TEMPEST_SOURCE=https://github.com/openstack/tempest
 ARG TEMPEST_VERSION=master
 
-ARG TEMPEST_PLUGIN_OCTAVIA_SOURCE=https://github.com/openstack/octavia-tempest-plugin
-ARG TEMPEST_PLUGIN_OCTAVIA_VERSION=master
+ARG TEMPEST_PLUGIN_OCTAVIA_SOURCE=https://github.com/stackhpc/octavia-tempest-plugin
+ARG TEMPEST_PLUGIN_OCTAVIA_VERSION=feature/non-admin
 
 ARG TEMPEST_PLUGIN_DESIGNATE_SOURCE=https://github.com/openstack/designate-tempest-plugin
 ARG TEMPEST_PLUGIN_DESIGNATE_VERSION=master
