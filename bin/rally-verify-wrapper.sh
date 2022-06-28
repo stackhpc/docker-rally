@@ -90,7 +90,7 @@ crudini --set ~/.rally/rally.conf openstack img_url http://download.cirros-cloud
 # WARNING: This option relies on a custom fork for rally-openstack and should
 # be considered unstable
 if [ ! -z ${RALLY_CONF_ENABLE_CREATE_TEMPEST_RESOURCES:+x} ]; then
-    crudini --set ~/.rally/rally.conf openstack enable_create_resources true
+    crudini --set ~/.rally/rally.conf openstack enable_create_resources "${RALLY_CONF_ENABLE_CREATE_TEMPEST_RESOURCES}"
 fi
 
 rally deployment create --fromenv --name openstack
