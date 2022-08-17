@@ -14,6 +14,9 @@ ARG TEMPEST_PLUGIN_DESIGNATE_VERSION=master
 ARG TEMPEST_PLUGIN_IRONIC_SOURCE=https://github.com/openstack/ironic-tempest-plugin
 ARG TEMPEST_PLUGIN_IRONIC_VERSION=master
 
+ARG TEMPEST_PLUGIN_MANILA_SOURCE=https://github.com/openstack/manila-tempest-plugin
+ARG TEMPEST_PLUGIN_MANILA_VERSION=master
+
 RUN apt-get update && apt-get install --yes sudo python3-dev python3-pip vim git-core crudini jq iputils-ping && \
     apt clean && \
     pip3 --no-cache-dir install --upgrade pip setuptools && \
@@ -43,6 +46,7 @@ RUN rally verify create-verifier --name default --type tempest --source $TEMPEST
 RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_OCTAVIA_SOURCE --version $TEMPEST_PLUGIN_OCTAVIA_VERSION
 RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_DESIGNATE_SOURCE --version $TEMPEST_PLUGIN_DESIGNATE_VERSION
 RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_IRONIC_SOURCE --version $TEMPEST_PLUGIN_IRONIC_VERSION
+RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_MANILA_SOURCE --version $TEMPEST_PLUGIN_MANILA_VERSION
 
 COPY bin/rally-verify-wrapper.sh /usr/bin/rally-verify-wrapper.sh
 COPY bin/rally-extract-tests.sh /usr/bin/rally-extract-tests.sh
