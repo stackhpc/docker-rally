@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install --yes sudo python3-dev python3-pip vim git
     echo "rally ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/00-rally-user && \
     mkdir /rally && chown -R rally:rally /rally
 
-RUN pip install git+https://github.com/stackhpc/rally-openstack.git@fix-rally --no-cache-dir && \
+RUN pip install git+https://github.com/stackhpc/rally-openstack.git@feature/non-admin-creds --no-cache-dir && \
     pip3 install pymysql psycopg2-binary --no-cache-dir
 
 COPY ./etc/motd_for_docker /etc/motd
