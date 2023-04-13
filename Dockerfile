@@ -17,7 +17,7 @@ ARG TEMPEST_PLUGIN_IRONIC_VERSION=master
 ARG TEMPEST_PLUGIN_MANILA_SOURCE=https://github.com/openstack/manila-tempest-plugin
 ARG TEMPEST_PLUGIN_MANILA_VERSION=master
 
-ARG TEMPEST_PLUGIN_MAGNUM_SOURCE=https://github.com/openstack/magnum-tempest-plugin
+ARG TEMPEST_PLUGIN_MAGNUM_SOURCE=https://github.com/scrungus/magnum-tempest-plugin
 ARG TEMPEST_PLUGIN_MAGNUM_VERSION=master
 
 RUN apt-get update && apt-get install --yes sudo python3-dev python3-pip vim git-core crudini jq iputils-ping && \
