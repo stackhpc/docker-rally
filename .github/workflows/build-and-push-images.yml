@@ -42,6 +42,8 @@ jobs:
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
             # all other branches get the dev tag
             type=raw,value=dev,enable=${{ github.ref != format('refs/heads/{0}', 'master') }}
+            # on tag creation, tag images with tag contents 
+            type=ref,enable=true,priority=600,prefix=,suffix=,event=tag
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
