@@ -3,22 +3,22 @@ FROM ubuntu:20.04
 RUN sed -i s/^deb-src.*// /etc/apt/sources.list
 
 ARG TEMPEST_SOURCE=https://github.com/openstack/tempest
-ARG TEMPEST_VERSION=master
+ARG TEMPEST_VERSION=wallaby-last
 
 ARG TEMPEST_PLUGIN_OCTAVIA_SOURCE=https://github.com/stackhpc/octavia-tempest-plugin
-ARG TEMPEST_PLUGIN_OCTAVIA_VERSION=feature/non-admin
+ARG TEMPEST_PLUGIN_OCTAVIA_VERSION=wallaby-last
 
 ARG TEMPEST_PLUGIN_DESIGNATE_SOURCE=https://github.com/openstack/designate-tempest-plugin
-ARG TEMPEST_PLUGIN_DESIGNATE_VERSION=master
+ARG TEMPEST_PLUGIN_DESIGNATE_VERSION=wallaby-last
 
 ARG TEMPEST_PLUGIN_IRONIC_SOURCE=https://github.com/openstack/ironic-tempest-plugin
-ARG TEMPEST_PLUGIN_IRONIC_VERSION=master
+ARG TEMPEST_PLUGIN_IRONIC_VERSION=wallaby-last
 
 ARG TEMPEST_PLUGIN_MANILA_SOURCE=https://github.com/openstack/manila-tempest-plugin
-ARG TEMPEST_PLUGIN_MANILA_VERSION=master
+ARG TEMPEST_PLUGIN_MANILA_VERSION=wallaby-last
 
 ARG TEMPEST_PLUGIN_MAGNUM_SOURCE=https://github.com/openstack/magnum-tempest-plugin
-ARG TEMPEST_PLUGIN_MAGNUM_VERSION=master
+ARG TEMPEST_PLUGIN_MAGNUM_VERSION=wallaby-last
 
 RUN apt-get update && apt-get install --yes sudo python3-dev python3-pip vim git-core crudini jq iputils-ping && \
     apt clean && \
