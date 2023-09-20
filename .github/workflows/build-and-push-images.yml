@@ -42,7 +42,7 @@ jobs:
             latest=false
           tags: |
             # minimal
-            type=pep440,pattern={{version}}
+            type=ref,event=tag
             # set latest tag for default branch
             type=raw,value=latest,enable={{is_default_branch}}
         
