@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 RUN sed -i s/^deb-src.*// /etc/apt/sources.list
 
 ARG TEMPEST_SOURCE=https://github.com/openstack/tempest
-ARG TEMPEST_VERSION=wallaby-last
+ARG TEMPEST_VERSION=e5da6756b9e7fb8fbedade5d3a428e0a8bff94ff
 
 ARG TEMPEST_PLUGIN_OCTAVIA_SOURCE=https://github.com/stackhpc/octavia-tempest-plugin
 ARG TEMPEST_PLUGIN_OCTAVIA_VERSION=wallaby-last
