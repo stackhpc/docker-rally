@@ -85,7 +85,7 @@ crudini --set ~/.rally/rally.conf openstack flavor_ref_ram 128
 crudini --set ~/.rally/rally.conf openstack flavor_ref_alt_ram 256
 crudini --set ~/.rally/rally.conf openstack flavor_ref_disk 1
 crudini --set ~/.rally/rally.conf openstack flavor_ref_alt_disk 1
-crudini --set ~/.rally/rally.conf openstack img_url http://download.cirros-cloud.net/0.5.1/cirros-0.5.1-x86_64-disk.img
+crudini --set ~/.rally/rally.conf openstack img_url http://download.cirros-cloud.net/0.6.2/cirros-0.6.2-x86_64-disk.img
 
 # WARNING: This option relies on a custom fork for rally-openstack and should
 # be considered unstable
