@@ -85,7 +85,8 @@ crudini --set ~/.rally/rally.conf openstack flavor_ref_ram 128
 crudini --set ~/.rally/rally.conf openstack flavor_ref_alt_ram 256
 crudini --set ~/.rally/rally.conf openstack flavor_ref_disk 1
 crudini --set ~/.rally/rally.conf openstack flavor_ref_alt_disk 1
-crudini --set ~/.rally/rally.conf openstack img_url http://download.cirros-cloud.net/0.5.1/cirros-0.5.1-x86_64-disk.img
+# Use a StackHPC-built image without a default password.
+crudini --set ~/.rally/rally.conf openstack img_url https://github.com/stackhpc/cirros/releases/download/20231206/cirros-d231206-x86_64-disk.img
 
 # WARNING: This option relies on a custom fork for rally-openstack and should
 # be considered unstable
