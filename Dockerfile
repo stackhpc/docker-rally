@@ -20,6 +20,10 @@ ARG TEMPEST_PLUGIN_MANILA_VERSION=master
 ARG TEMPEST_PLUGIN_MAGNUM_SOURCE=https://github.com/openstack/magnum-tempest-plugin
 ARG TEMPEST_PLUGIN_MAGNUM_VERSION=master
 
+ARG RALLY_OPENSTACK_SOURCE=https://github.com/stackhpc/rally-openstack.git
+ARG RALLY_OPENSTACK_VERSION=feature/non-admin-creds
+ARG RALLY_OPENSTACK_UPPER_CONSTRAINTS=https://raw.githubusercontent.com/stackhpc/rally-openstack/$RALLY_OPENSTACK_VERSION/upper-constraints.txt
+
 RUN apt-get update && apt-get install --yes sudo python3-dev python3-pip vim git-core crudini jq iputils-ping && \
     apt clean && \
     pip3 --no-cache-dir install --upgrade pip setuptools && \
@@ -28,8 +32,7 @@ RUN apt-get update && apt-get install --yes sudo python3-dev python3-pip vim git
     echo "rally ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/00-rally-user && \
     mkdir /rally && chown -R rally:rally /rally
 
-RUN pip install git+https://github.com/stackhpc/rally-openstack.git@feature/non-admin-creds --no-cache-dir && \
-    pip3 install pymysql psycopg2-binary fixtures --no-cache-dir
+RUN pip3 install git+$RALLY_OPENSTACK_SOURCE@$RALLY_OPENSTACK_VERSION pymysql psycopg2-binary fixtures --no-cache-dir -c $RALLY_OPENSTACK_UPPER_CONSTRAINTS
 
 COPY ./etc/motd_for_docker /etc/motd
 RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' >> /etc/bash.bashrc
