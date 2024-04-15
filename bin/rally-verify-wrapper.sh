@@ -78,7 +78,16 @@ else
 fi
 set -x
 
-unset OS_CACERT
+if [[ -z "$(sudo ls -A /usr/local/share/ca-certificates)" ]]; then
+    # Assume that any CA certificate referenced in the openrc file will not be
+    # valid within the container.
+    unset OS_CACERT
+else
+    # Use the container's system CA trust store. This allows for bind mounting a CA
+    # certificate under /usr/local/share/ca-certificates/.
+    sudo update-ca-certificates
+    export OS_CACERT=/etc/ssl/certs/ca-certificates.crt
+fi
 
 crudini --set ~/.rally/rally.conf DEFAULT openstack_client_http_timeout 300
 crudini --set ~/.rally/rally.conf openstack flavor_ref_ram 128
