@@ -38,7 +38,7 @@ COPY ./etc/motd_for_docker /etc/motd
 RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' >> /etc/bash.bashrc
 
 USER rally
-ENV HOME /home/rally
+ENV HOME=/home/rally
 RUN mkdir -p /home/rally/.rally
 
 RUN touch ~/.rally/rally.conf
