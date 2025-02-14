@@ -20,27 +20,27 @@ ARG TEMPEST_PLUGIN_MANILA_VERSION=master
 ARG TEMPEST_PLUGIN_MAGNUM_SOURCE=https://github.com/openstack/magnum-tempest-plugin
 ARG TEMPEST_PLUGIN_MAGNUM_VERSION=master
 
-ARG TEMPEST_PLUGIN_BARBICAN_SOURCE=https://opendev.org/openstack/barbican-tempest-plugin
+ARG TEMPEST_PLUGIN_BARBICAN_SOURCE=https://github.com/openstack/barbican-tempest-plugin
 ARG TEMPEST_PLUGIN_BARBICAN_VERSION=master
 
-ARG TEMPEST_PLUGIN_CINDER_SOURCE=https://opendev.org/openstack/cinder-tempest-plugin
+ARG TEMPEST_PLUGIN_CINDER_SOURCE=https://github.com/openstack/cinder-tempest-plugin
 ARG TEMPEST_PLUGIN_CINDER_VERSION=master
 
-ARG TEMPEST_PLUGIN_CLOUDKITTY_SOURCE=https://opendev.org/openstack/cloudkitty-tempest-plugin
+ARG TEMPEST_PLUGIN_CLOUDKITTY_SOURCE=https://github.com/openstack/cloudkitty-tempest-plugin
 ARG TEMPEST_PLUGIN_CLOUDKITTY_VERSION=master
 
-ARG TEMPEST_PLUGIN_GLANCE_SOURCE=https://opendev.org/openstack/glance-tempest-plugin
+ARG TEMPEST_PLUGIN_GLANCE_SOURCE=https://github.com/openstack/glance-tempest-plugin
 ARG TEMPEST_PLUGIN_GLANCE_VERSION=master
 
-ARG TEMPEST_PLUGIN_KEYSTONE_SOURCE=https://opendev.org/openstack/keystone-tempest-plugin
+ARG TEMPEST_PLUGIN_KEYSTONE_SOURCE=https://github.com/openstack/keystone-tempest-plugin
 ARG TEMPEST_PLUGIN_KEYSTONE_VERSION=master
 
-ARG TEMPEST_PLUGIN_NEUTRON_SOURCE=https://opendev.org/openstack/neutron-tempest-plugin
+ARG TEMPEST_PLUGIN_NEUTRON_SOURCE=https://github.com/openstack/neutron-tempest-plugin
 ARG TEMPEST_PLUGIN_NEUTRON_VERSION=master
 
 # Does not work if included.
 # Error output: 'Could not load 'ngs_tests': No module named 'tempest_plugin'
-# ARG TEMPEST_PLUGIN_NETWORKING_GENERIC_SWITCH_SOURCE=https://opendev.org/openstack/networking-generic-switch
+# ARG TEMPEST_PLUGIN_NETWORKING_GENERIC_SWITCH_SOURCE=https://github.com/openstack/networking-generic-switch
 # ARG TEMPEST_PLUGIN_NETWORKING_GENERIC_SWITCH_VERSION=master
 
 ARG RALLY_OPENSTACK_SOURCE=https://github.com/openstack/rally-openstack.git
