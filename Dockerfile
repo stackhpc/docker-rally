@@ -43,8 +43,9 @@ ARG TEMPEST_PLUGIN_NEUTRON_VERSION=master
 # ARG TEMPEST_PLUGIN_NETWORKING_GENERIC_SWITCH_SOURCE=https://github.com/openstack/networking-generic-switch
 # ARG TEMPEST_PLUGIN_NETWORKING_GENERIC_SWITCH_VERSION=master
 
-ARG RALLY_OPENSTACK_SOURCE=https://github.com/openstack/rally-openstack.git
-ARG RALLY_OPENSTACK_VERSION=master
+ARG RALLY_OPENSTACK_SOURCE=https://github.com/stackhpc/rally-openstack.git
+# Update after https://github.com/stackhpc/rally-openstack/pull/3/files has been merged.
+ARG RALLY_OPENSTACK_VERSION=non-admin-credentials
 ARG RALLY_OPENSTACK_UPPER_CONSTRAINTS=https://raw.githubusercontent.com/openstack/rally-openstack/$RALLY_OPENSTACK_VERSION/upper-constraints.txt
 
 RUN apt-get update && apt-get install --yes sudo python3-dev python3-pip vim git-core crudini jq iputils-ping && \
