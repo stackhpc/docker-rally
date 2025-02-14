@@ -20,9 +20,9 @@ ARG TEMPEST_PLUGIN_MANILA_VERSION=master
 ARG TEMPEST_PLUGIN_MAGNUM_SOURCE=https://github.com/openstack/magnum-tempest-plugin
 ARG TEMPEST_PLUGIN_MAGNUM_VERSION=master
 
-ARG RALLY_OPENSTACK_SOURCE=https://github.com/stackhpc/rally-openstack.git
-ARG RALLY_OPENSTACK_VERSION=feature/non-admin-creds
-ARG RALLY_OPENSTACK_UPPER_CONSTRAINTS=https://raw.githubusercontent.com/stackhpc/rally-openstack/$RALLY_OPENSTACK_VERSION/upper-constraints.txt
+ARG RALLY_OPENSTACK_SOURCE=https://github.com/openstack/rally-openstack.git
+ARG RALLY_OPENSTACK_VERSION=master
+ARG RALLY_OPENSTACK_UPPER_CONSTRAINTS=https://raw.githubusercontent.com/openstack/rally-openstack/$RALLY_OPENSTACK_VERSION/upper-constraints.txt
 
 RUN apt-get update && apt-get install --yes sudo python3-dev python3-pip vim git-core crudini jq iputils-ping && \
     apt clean && \
