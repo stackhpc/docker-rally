@@ -5,8 +5,8 @@ RUN sed -i s/^deb-src.*// /etc/apt/sources.list
 ARG TEMPEST_SOURCE=https://github.com/openstack/tempest
 ARG TEMPEST_VERSION=master
 
-ARG TEMPEST_PLUGIN_OCTAVIA_SOURCE=https://github.com/stackhpc/octavia-tempest-plugin
-ARG TEMPEST_PLUGIN_OCTAVIA_VERSION=feature/non-admin
+ARG TEMPEST_PLUGIN_OCTAVIA_SOURCE=https://github.com/openstack/octavia-tempest-plugin
+ARG TEMPEST_PLUGIN_OCTAVIA_VERSION=master
 
 ARG TEMPEST_PLUGIN_DESIGNATE_SOURCE=https://github.com/openstack/designate-tempest-plugin
 ARG TEMPEST_PLUGIN_DESIGNATE_VERSION=master
@@ -19,6 +19,29 @@ ARG TEMPEST_PLUGIN_MANILA_VERSION=master
 
 ARG TEMPEST_PLUGIN_MAGNUM_SOURCE=https://github.com/openstack/magnum-tempest-plugin
 ARG TEMPEST_PLUGIN_MAGNUM_VERSION=master
+
+ARG TEMPEST_PLUGIN_BARBICAN_SOURCE=https://opendev.org/openstack/barbican-tempest-plugin
+ARG TEMPEST_PLUGIN_BARBICAN_VERSION=master
+
+ARG TEMPEST_PLUGIN_CINDER_SOURCE=https://opendev.org/openstack/cinder-tempest-plugin
+ARG TEMPEST_PLUGIN_CINDER_VERSION=master
+
+ARG TEMPEST_PLUGIN_CLOUDKITTY_SOURCE=https://opendev.org/openstack/cloudkitty-tempest-plugin
+ARG TEMPEST_PLUGIN_CLOUDKITTY_VERSION=master
+
+ARG TEMPEST_PLUGIN_GLANCE_SOURCE=https://opendev.org/openstack/glance-tempest-plugin
+ARG TEMPEST_PLUGIN_GLANCE_VERSION=master
+
+ARG TEMPEST_PLUGIN_KEYSTONE_SOURCE=https://opendev.org/openstack/keystone-tempest-plugin
+ARG TEMPEST_PLUGIN_KEYSTONE_VERSION=master
+
+ARG TEMPEST_PLUGIN_NEUTRON_SOURCE=https://opendev.org/openstack/neutron-tempest-plugin
+ARG TEMPEST_PLUGIN_NEUTRON_VERSION=master
+
+# Does not work if included.
+# Error output: 'Could not load 'ngs_tests': No module named 'tempest_plugin'
+# ARG TEMPEST_PLUGIN_NETWORKING_GENERIC_SWITCH_SOURCE=https://opendev.org/openstack/networking-generic-switch
+# ARG TEMPEST_PLUGIN_NETWORKING_GENERIC_SWITCH_VERSION=master
 
 ARG RALLY_OPENSTACK_SOURCE=https://github.com/openstack/rally-openstack.git
 ARG RALLY_OPENSTACK_VERSION=master
@@ -54,6 +77,13 @@ RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_DESIGNATE_SOURCE --ve
 RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_IRONIC_SOURCE --version $TEMPEST_PLUGIN_IRONIC_VERSION
 RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_MANILA_SOURCE --version $TEMPEST_PLUGIN_MANILA_VERSION
 RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_MAGNUM_SOURCE --version $TEMPEST_PLUGIN_MAGNUM_VERSION
+RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_BARBICAN_SOURCE --version $TEMPEST_PLUGIN_BARBICAN_VERSION
+RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_CINDER_SOURCE --version $TEMPEST_PLUGIN_CINDER_VERSION
+RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_CLOUDKITTY_SOURCE --version $TEMPEST_PLUGIN_CLOUDKITTY_VERSION
+RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_GLANCE_SOURCE --version $TEMPEST_PLUGIN_GLANCE_VERSION
+RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_KEYSTONE_SOURCE --version $TEMPEST_PLUGIN_KEYSTONE_VERSION
+RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_NEUTRON_SOURCE --version $TEMPEST_PLUGIN_NEUTRON_VERSION
+# RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_NETWORKING_GENERIC_SWITCH_SOURCE --version $TEMPEST_PLUGIN_NETWORKING_GENERIC_SWITCH_VERSION
 
 COPY bin/rally-verify-wrapper.sh /usr/bin/rally-verify-wrapper.sh
 COPY bin/rally-extract-tests.sh /usr/bin/rally-extract-tests.sh
