@@ -38,6 +38,9 @@ ARG TEMPEST_PLUGIN_KEYSTONE_VERSION=master
 ARG TEMPEST_PLUGIN_NEUTRON_SOURCE=https://github.com/openstack/neutron-tempest-plugin
 ARG TEMPEST_PLUGIN_NEUTRON_VERSION=master
 
+ARG TEMPEST_PLUGIN_BLAZAR_SOURCE=https://github.com/openstack/blazar-tempest-plugin
+ARG TEMPEST_PLUGIN_NEUTRON_VERSION=master
+
 # Does not work if included.
 # Error output: 'Could not load 'ngs_tests': No module named 'tempest_plugin'
 # ARG TEMPEST_PLUGIN_NETWORKING_GENERIC_SWITCH_SOURCE=https://github.com/openstack/networking-generic-switch
@@ -84,6 +87,7 @@ RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_CLOUDKITTY_SOURCE --v
 RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_GLANCE_SOURCE --version $TEMPEST_PLUGIN_GLANCE_VERSION
 RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_KEYSTONE_SOURCE --version $TEMPEST_PLUGIN_KEYSTONE_VERSION
 RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_NEUTRON_SOURCE --version $TEMPEST_PLUGIN_NEUTRON_VERSION
+RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_BLAZAR_SOURCE --version $TEMPEST_PLUGIN_BLAZAR_VERSION
 # RUN rally verify add-verifier-ext --source $TEMPEST_PLUGIN_NETWORKING_GENERIC_SWITCH_SOURCE --version $TEMPEST_PLUGIN_NETWORKING_GENERIC_SWITCH_VERSION
 
 COPY bin/rally-verify-wrapper.sh /usr/bin/rally-verify-wrapper.sh
