@@ -39,7 +39,7 @@ ARG TEMPEST_PLUGIN_NEUTRON_SOURCE=https://github.com/openstack/neutron-tempest-p
 ARG TEMPEST_PLUGIN_NEUTRON_VERSION=master
 
 ARG TEMPEST_PLUGIN_BLAZAR_SOURCE=https://github.com/openstack/blazar-tempest-plugin
-ARG TEMPEST_PLUGIN_NEUTRON_VERSION=master
+ARG TEMPEST_PLUGIN_BLAZAR_VERSION=master
 
 # Does not work if included.
 # Error output: 'Could not load 'ngs_tests': No module named 'tempest_plugin'
