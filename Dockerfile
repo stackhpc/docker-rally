@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 RUN sed -i s/^deb-src.*// /etc/apt/sources.list
 
@@ -48,15 +48,18 @@ ARG RALLY_OPENSTACK_SOURCE=https://github.com/stackhpc/rally-openstack.git
 ARG RALLY_OPENSTACK_VERSION=master
 ARG RALLY_OPENSTACK_UPPER_CONSTRAINTS=https://raw.githubusercontent.com/stackhpc/rally-openstack/$RALLY_OPENSTACK_VERSION/upper-constraints.txt
 
-RUN apt-get update && apt-get install --yes sudo python3-dev python3-pip vim git-core crudini jq iputils-ping && \
+RUN apt-get update && apt-get install --yes sudo python3-dev python3-venv vim git-core crudini jq iputils-ping && \
     apt clean && \
-    pip3 --no-cache-dir install --upgrade pip setuptools && \
     useradd -u 65500 -m rally && \
     usermod -aG sudo rally && \
     echo "rally ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/00-rally-user && \
     mkdir /rally && chown -R rally:rally /rally
 
-RUN pip3 install git+$RALLY_OPENSTACK_SOURCE@$RALLY_OPENSTACK_VERSION pymysql psycopg2-binary fixtures --no-cache-dir -c $RALLY_OPENSTACK_UPPER_CONSTRAINTS
+ENV VIRTUAL_ENV=/opt/rally-venv
+ENV PATH="${VIRTUAL_ENV}/bin:${PATH}"
+
+RUN python3 -m venv "${VIRTUAL_ENV}" && \
+    "${VIRTUAL_ENV}/bin/pip" install git+$RALLY_OPENSTACK_SOURCE@$RALLY_OPENSTACK_VERSION pymysql psycopg2-binary fixtures --no-cache-dir -c $RALLY_OPENSTACK_UPPER_CONSTRAINTS
 
 COPY ./etc/motd_for_docker /etc/motd
 RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' >> /etc/bash.bashrc
